@@ -5,10 +5,12 @@ import requests
 import json
 from ipinfo import getHandler  # Corrected import
 import os
+import logging
 
 app = Flask(__name__)
 
-
+# Enable debugging logs in Flask
+logging.basicConfig(level=logging.DEBUG)
 
 # Function to detect WP Rocket caching
 def detect_wp_rocket(url):
