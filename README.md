@@ -1,12 +1,13 @@
 # Cache Analyzer - Website Caching & Hosting Checker
 
-A tool to analyze website caching layers, detect WP Rocket, Cloudflare, and other caching mechanisms, and identify hosting providers.
+A simple web tool to analyze website caching layers, detect WP Rocket, Cloudflare, and other caching mechanisms, and identify hosting providers.
 
 ## Features
-- Detect WP Rocket & Cache Timestamp  
-- Identify Cloudflare, Varnish, and server-side caching  
+- Detect WP Rocket & Active Caching   
+- Identify Second Layer of cache such as Cloudflare, Varnish, and server-side caching
+- Directly check a site's Caching Timestamp 
 - Find hosting provider information  
-- API-based deployment for easy WordPress integration  
+- Option for easy WordPress integration  
 
 ##  Installation
 
