@@ -152,8 +152,18 @@ def analyze():
     if not url:
         return jsonify({"error": "URL is required"}), 400
 
-    # Perform analysis here...
-    result = {"message": "Cache analysis successful", "url": url}
+    print(f"🔹 Received request for URL: {url}")  # Debugging
+
+    # Perform cache analysis before returning response
+    cache_status = detect_wp_rocket(url)
+
+    result = {
+        "message": "Cache analysis successful",
+        "url": url,
+        "cache_status": cache_status
+    }
+
+    print(f"🔹 API Response: {result}")  # Debugging
     return jsonify(result)
 
 #  This allows you to host the app and make it accessible locally
