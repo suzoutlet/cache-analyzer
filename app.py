@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from urllib.parse import urlparse
 from socket import gethostbyname
 import requests
@@ -116,6 +116,19 @@ def home():
         url = request.form["url"]
         result = analyze_headers(url)  # Previously was only printing, now it's returning a dictionary
     return render_template("index.html", result=result)
+
+# Handles GET requests to /analyze
+@app.route("/analyze", methods=["GET"])
+def analyze():
+    url = request.args.get("url")
+    if not url:
+        return jsonify({"error": "URL is required"}), 400
+
+    # Perform analysis here...
+    result = {"message": "Cache analysis successful", "url": url}
+    return jsonify(result)
+
+#  This allows you to host the app and make it accessible locally
 
 # if __name__ == "__main__":
 #     app.run(debug=True)
