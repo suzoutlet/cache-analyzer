@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+env/
+.DS_Store
+
+# Virtual environment files
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Flask
+instance/
+*.db
+*.sqlite3
+
+# VS Code
+.vscode/
+
+# Render / Deployment
+*.log
+config.py
