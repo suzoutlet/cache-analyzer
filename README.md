@@ -12,5 +12,5 @@ A tool to analyze website caching layers, detect WP Rocket, Cloudflare, and othe
 
 1. **Clone the repository**  
    ```bash
-   git clone https://github.com/your-username/cache-analyzer.git
+   git clone https://github.com/suzoutlet/cache-analyzer.git
    cd cache-analyzer
