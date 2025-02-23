@@ -15,6 +15,27 @@ logging.basicConfig(level=logging.DEBUG)
 # Function to detect WP Rocket caching
 def detect_wp_rocket(url):
     try:
+
+        # Start
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.75 Safari/537.36"
+        }
+
+        response = requests.get(url, headers=headers, timeout=10)
+
+        if response.status_code != 200:
+            print(f"❌ Failed to load page, status: {response.status_code}")
+            return "Failed to fetch page"
+
+        body = response.text
+        headers = response.headers
+
+        # Debugging: Log response status, headers, and first 500 characters of body
+        print(f"🔹 Response Status Code: {response.status_code}")
+        print(f"🔹 Response Headers: {headers}")
+        print(f"🔹 First 500 Characters of Response Body:\n{body[:500]}")
+
+        # End
         response = requests.get(url, timeout=10)
  
         # Default values to prevent errors
@@ -36,6 +57,11 @@ def detect_wp_rocket(url):
                 return "WP Rocket detected, but timestamp not found.", cache_timestamp, cache_timestamp_link
             else:
                 return "WP Rocket detected and Optimized, but no cache timestamp found. Optimized but not cached.", cache_timestamp, cache_timestamp_link
+            
+        # Debugging: Log WP Rocket detection status
+        print(f"🔹 WP Rocket Detection: {cache_status}")
+
+        return cache_status
     except Exception as e:
         print(f"Error fetching the page: {e}")
     return "No WP Rocket cache detected.", cache_timestamp, cache_timestamp_link
