@@ -1,0 +1,158 @@
+/* General Styling */
+body {
+    background-color: #f8f9fa;
+}
+
+h1 {
+    font-size: 1.6rem;
+}
+
+/* Header Styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 15px 20px;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 50px;
+}
+
+/* Left Side: Logo + Title */
+.header-left {
+    display: flex;
+    /align-items: center;
+}
+
+.logo {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* Right Side: Buttons */
+.header-right {
+    display: flex;
+    gap: 15px;
+    align-items: anchor-center;
+}
+
+.btn-light {
+    background-color: #e0e0e0;
+    border: none;
+    padding: 8px 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-light:hover {
+    background-color: #d6d6d6;
+}
+
+/* GitHub Link */
+.header-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.header-link:hover {
+    text-decoration: underline;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 8px;
+}
+
+.card-header {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Tables */
+.table-sm th, .table-sm td {
+    font-size: 0.85rem;
+    padding: 4px;
+}
+
+/* Buttons */
+.btn-primary {
+    font-weight: bold;
+}
+
+.btn-outline-primary {
+    text-decoration: none;
+}
+
+/* Fix Table Overflow */
+.card-body {
+    overflow-x: auto;  /* Enables horizontal scrolling if needed */
+    max-width: 100%;   /* Ensures the content stays within the column */
+}
+
+/* Compact Table Rows */
+.table-sm th, .table-sm td {
+    font-size: 0.8rem;  /* Smaller text */
+    padding: 3px 6px;   /* Tighter row spacing */
+    white-space: nowrap; /* Prevents breaking into multiple lines */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Adds "..." when text is too long */
+    max-width: 200px; /* Ensures columns stay a reasonable width */
+}
+
+/* Ensures Table Stays Within Column */
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+/* Ensure table cells truncate text properly */
+.table-sm td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 200px;
+    position: relative;
+}
+
+   /* Tooltip Position Fix */
+.tooltip-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Tooltip Icon */
+.tooltip-icon {
+    cursor: pointer;
+    margin-left: 5px;
+    color: #6c757d;
+    font-weight: bold;
+    font-size: 0.85rem;
+}
+
+/* Tooltip Styling */
+.tooltip-text {
+    visibility: hidden;
+    background-color: #fff;
+    color: #333;
+    text-align: left;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    position: fixed; /* Keeps it above table elements */
+    z-index: 99999;
+    white-space: normal;
+    font-size: 0.85rem;
+    max-width: 250px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+/* Tooltip Appears When Clicked */
+.tooltip-icon:active + .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

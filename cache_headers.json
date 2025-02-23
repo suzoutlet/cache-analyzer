@@ -1,0 +1,101 @@
+{
+    "cache_headers": [
+        {"name": "CF-Cache-Status", "description": "Cloudflare cache status (e.g., HIT, MISS, BYPASS)."},
+        {"name": "X-Cache", "description": "Server-side or CDN caching status."},
+        {"name": "X-Proxy-Cache", "description": "Proxy cache status (e.g., HIT, MISS)."},
+        {"name": "X-Varnish", "description": "Varnish cache status."},
+        {"name": "X-FastCGI-Cache", "description": "NGINX FastCGI cache status."},
+        {"name": "SG-Cache-Control", "description": "SiteGround's caching control header."},
+        {"name": "X-Aruba-Cache","description": "Aruba HiSpeed caching control header." }
+    ],
+    "cache_details": {
+        "Cache-Control": {
+            "explanation": "General caching directives.",
+            "values": {
+                "no-cache": "Content must be revalidated.",
+                "public": "Content can be cached by any intermediary.",
+                "private": "Content is only cacheable by the client."
+            },
+            "type": "general"
+        },
+        "Expires": {
+            "explanation": "Specifies when the content expires.",
+            "type": "general"
+        },
+        "Age": {
+            "explanation": "Time (in seconds) since the content was cached.",
+            "type": "general"
+        },
+        "Server": {
+            "explanation": "Reveals server software or CDN provider.",
+            "type": "server"
+        },
+        "Vary": {
+            "explanation": "Indicates which headers should be considered when caching content.",
+            "type": "general"
+        },
+        "CF-Cache-Status": {
+            "explanation": "Cloudflare cache status (e.g., HIT, MISS, BYPASS).",
+            "values": {
+                "HIT": "Content served from Cloudflare cache.",
+                "MISS": "Content fetched from the origin server.",
+                "BYPASS": "Content deliberately not cached."
+            },
+            "type": "proxy"
+        },
+        "X-Aruba-Cache": {
+            "explanation": "Aruba HiSpeed cache status (e.g., HIT, MISS, BYPASS).",
+            "values": {
+                "HIT": "Content served from Aruba HiSpeed cache.",
+                "MISS": "Content fetched from the origin server.",
+                "BYPASS": "Content deliberately not cached."
+            },
+            "type": "proxy"
+        },
+        "X-Cache": {
+            "explanation": "Server-side or CDN caching status.",
+            "values": {
+                "HIT": "Content served from cache.",
+                "MISS": "Content fetched from the origin server.",
+                "BYPASS": "Content deliberately not cached."
+            },
+            "type": "server"
+        },
+        "X-Proxy-Cache": {
+            "explanation": "Proxy cache status (e.g., HIT, MISS).",
+            "values": {
+                "HIT": "Content served from the proxy cache.",
+                "MISS": "Content fetched from the origin server."
+            },
+            "type": "proxy"
+        },
+        "X-Varnish": {
+            "explanation": "Varnish cache status.",
+            "values": {
+                "HIT": "Content served from Varnish cache.",
+                "MISS": "Content fetched from the origin server."
+            },
+            "type": "proxy"
+        },
+        "X-FastCGI-Cache": {
+            "explanation": "NGINX FastCGI cache status.",
+            "values": {
+                "HIT": "Content served from FastCGI cache.",
+                "MISS": "Content fetched from the origin server."
+            },
+            "type": "server"
+        },
+        "SG-Cache-Control": {
+            "explanation": "SiteGround's caching control header.",
+            "values": {
+                "dynamic cache": "Dynamic content is cached.",
+                "no-cache": "Dynamic content is not cached."
+            },
+            "type": "server"
+        },
+        "cf-apo-via": {
+            "explanation": "Indicates Cloudflare APO is enabled.",
+            "type": "proxy"
+        }
+    }
+}

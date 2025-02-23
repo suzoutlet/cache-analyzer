@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cache Analysis Tool</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body class="container mt-4">
+
+    <header class="header">
+        <div class="header-left">
+            <img src="{{ url_for('static', filename='logo.webp') }}" alt="Logo" class="logo">
+            <h1 class="mb-4 text-primary text-center">Website Caching & Hosting Checker</h1>
+        </div>
+        <div class="header-right">
+            <button class="btn-light" type="button" onclick="fillRandomSite()">Test a Random Site</button>
+            <a href="https://github.com/suzoutlet" target="_blank" class="header-link">View on GitHub</a>
+        </div>
+    </header>
+
+    <!-- Input Form -->
+    <form method="POST" class="mb-4">
+        <div class="input-group">
+            <input type="text" class="form-control" id="url" name="url" placeholder="https://example.com" value="{{ request.form['url'] if request.form.get('url') else '' }}" required>
+            <button type="submit" class="btn btn-primary">Analyze</button>
+        </div>
+    </form>
+
+    {% if result %}
+    <div class="row">
+
+        <!-- Left Column: Caching & Hosting Info -->
+        <div class="col-md-6">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header bg-success text-white">Page Caching</div>
+                <div class="card-body">
+                    {% if "WP Rocket cache detected with active caching." in result.wp_rocket %}
+                        <p class="fw-bold text-success bg-light p-2 rounded border border-success">
+                            {{ result.wp_rocket }}
+                        </p>
+                    {% else %}
+                        <p class="fw-bold text-dark">{{ result.wp_rocket }}</p>
+                    {% endif %}
+
+                    {% if result.cache_timestamp %}
+                        <p><strong>Cache Timestamp:</strong> {{ result.cache_timestamp }}</p>
+                    {% endif %}
+                    {% if result.cache_timestamp_link %}
+                        <p><a href="{{ result.cache_timestamp_link }}" target="_blank" class="btn btn-outline-primary btn-sm">Check Timestamp in Epoch Converter</a></p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card shadow-sm mb-3">
+                <div class="card-header bg-info text-white">Additional Cache Layers</div>
+                <div class="card-body">
+                    {% if result.additional_cache_layers %}
+                        <ul>
+                            {% for cache in result.additional_cache_layers %}
+                                <li class="text-dark">{{ cache }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No additional cache layers detected.</p>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="card shadow-sm">
+                <div class="card-header bg-warning text-dark">Hosting Information</div>
+                <div class="card-body">
+                    <p><strong>IP Address:</strong> <a href="https://ipinfo.io/{{ result.ip_address }}" target="_blank">{{ result.ip_address }}</a></p>
+                    <p><strong>Hosting Provider:</strong> {{ result.hosting_provider }}</p>
+                </div>
+            </div>
+        </div>
+        <!-- Right Column: Response Headers -->
+        <div class="col-md-6">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white">Response Headers</div>
+                <div class="card-body small table-container"> <!-- Added table-container for responsiveness -->
+                    {% if result.headers and result.headers|length > 0 %}
+                    {% if result.url %}
+                        <p>URL: <a href="{{ result.url }}" target="_blank" class="header-link">{{ result.url }}</a></p>
+                    {% endif %}
+                        <table class="table table-striped table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Header</th>
+                                    <th>Value</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for header in result.headers %}
+                                    <tr>
+                                        <td>{{ header.header }}</td>
+                                        <td>
+                                            <div class="tooltip-container">
+                                                <span class="text-truncate d-inline-block" style="max-width: 200px;">
+                                                    {{ header.value }}
+                                                </span>
+                                                {% if header.explanation %}
+                                                    <span class="tooltip-icon" onclick="toggleTooltip(this)">ⓘ</span>
+                                                    <span class="tooltip-text">{{ header.explanation }}</span>
+                                                {% endif %}
+                                            </div>
+                                        </td>                                        
+                                    </tr>
+                                {% endfor %}
+                            </tbody>                            
+                        </table>
+                    {% else %}
+                        <p>No headers found.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+
+
+    </div>
+    {% endif %}
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>
