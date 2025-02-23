@@ -117,9 +117,15 @@ def home():
         result = analyze_headers(url)  # Previously was only printing, now it's returning a dictionary
     return render_template("index.html", result=result)
 
-if __name__ == "__main__":
-    app.run(debug=True)
+# if __name__ == "__main__":
+#     app.run(debug=True)
 
 #  This allows Render to host the app and make it accessible publicly
 # if __name__ == "__main__":
-#     app.run(host="0.0.0.0", port=50000)
+#     app.run(host="0.0.0.0", port=10000)
+
+if __name__ == "__main__":
+    import os
+    port = int(os.environ.get("PORT", 10000))  # Detects port assigned by Render
+    app.run(host="0.0.0.0", port=port)
+
